@@ -1,0 +1,406 @@
+@import "common";
+@import "global";
+
+html {
+  background-color: $bgColor;
+}
+// 首页头部
+.index-header {
+  width: 100%;
+  height: px2rem(500px, $base-font-size);
+  background: $cdpColor url("../img/index-big-banner.jpg") no-repeat center center;
+  background-size: 100%;
+
+  .header-top {
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 px2rem(20px, $base-font-size);
+    height: px2rem(100px, $base-font-size);
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0));
+
+    .logo {
+      float: left;
+      width: px2rem(136px, $base-font-size);
+      height: px2rem(40px, $base-font-size);
+      margin-top: px2rem(20px, $base-font-size);
+      background: url("../img/index-logo.png") no-repeat center center;
+      background-size: 100%;
+    }
+
+    .area {
+      position: relative;
+      float: right;
+      font-size: 16px;
+      line-height: px2rem(84px, $base-font-size);
+      color: $whiteColor;
+
+      i {
+        margin-left: px2rem(10px, $base-font-size);
+        font-size: 12px;
+      }
+    }
+
+    .area-list {
+      z-index: 9999;
+      position: absolute;
+      top: px2rem(20px, $base-font-size);
+      right: px2rem(20px, $base-font-size);
+      background-color: $whiteColor;
+
+      li {
+        padding: px2rem(30px, $base-font-size);
+        font-size: 14px;
+        border-bottom: 1px solid $fontColor4;
+      }
+    }
+  }
+
+  .header-slogan {
+    width: 100%;
+    margin-top: px2rem(86px, $base-font-size);
+    text-align: center;
+    font-size: 30px;
+    color: $whiteColor;
+    letter-spacing: 5px;
+    text-shadow: 0 0 30px rgba(68, 75, 12, .5);
+  }
+
+  .header-search {
+    display: block;
+    box-sizing: border-box;
+    margin: px2rem(112px, $base-font-size) auto 0;
+    width: px2rem(680px, $base-font-size);
+    height: px2rem(70px, $base-font-size);
+    border: 2px solid $cdpColor;
+    background-color: $whiteColor;
+    border-radius: px2rem(34px, $base-font-size);
+    text-align: center;
+    line-height: px2rem(66px, $base-font-size);
+    font-size: 12px;
+    color: $fontColor3;
+    letter-spacing: 3px;
+
+    i {
+      font-size: 14px;
+      color: $fontColor3;
+      margin-right: 6px;
+    }
+  }
+}
+
+// 首页头部字体适配
+[data-dpr="2"] .index-header {
+  .header-top {
+    .area {
+      font-size: 32px;
+
+      i {
+        font-size: 24px;
+      }
+    }
+
+    .area-list {
+      li {
+        font-size: 28px;
+      }
+    }
+  }
+
+  .header-slogan {
+    font-size: 60px;
+  }
+
+  .header-search {
+    font-size: 24px;
+
+    i {
+      font-size: 28px;
+    }
+  }
+}
+
+[data-dpr="3"] .index-header {
+  .header-top {
+    .area {
+      font-size: 48px;
+
+      i {
+        font-size: 36px;
+      }
+    }
+
+    .area-list {
+      li {
+        font-size: 42px;
+      }
+    }
+  }
+
+  .header-slogan {
+    font-size: 90px;
+  }
+
+  .header-search {
+    font-size: 36px;
+
+    i {
+      font-size: 42px;
+    }
+  }
+}
+
+// 浮动搜索框
+.float-search {
+  z-index: 99999;
+  position: fixed;
+  top: -(px2rem(100px, $base-font-size));
+  left: 0;
+  width: 100%;
+  height: px2rem(100px, $base-font-size);
+  background-color: $cdpColorSub;
+  transition: all .2s linear;
+
+  .header-search {
+    display: block;
+    box-sizing: border-box;
+    margin: px2rem(15px, $base-font-size) auto 0;
+    width: px2rem(680px, $base-font-size);
+    height: px2rem(70px, $base-font-size);
+    border: 2px solid $cdpColor;
+    background-color: $whiteColor;
+    border-radius: px2rem(34px, $base-font-size);
+    text-align: center;
+    line-height: px2rem(66px, $base-font-size);
+    font-size: 12px;
+    color: $fontColor3;
+    letter-spacing: 3px;
+
+    i {
+      font-size: 14px;
+      color: $fontColor3;
+      margin-right: 6px;
+    }
+  }
+}
+
+[data-dpr="2"] .float-search {
+  .header-search {
+    font-size: 24px;
+
+    i {
+      font-size: 28px;
+    }
+  }
+}
+
+[data-dpr="3"] .float-search {
+  .header-search {
+    font-size: 36px;
+
+    i {
+      font-size: 42px;
+    }
+  }
+}
+
+// 小分类推荐
+.classify {
+  position: relative;
+  background-color: $whiteColor;
+
+  &:after,
+  &:before {
+    position: absolute;
+    z-index: 99;
+    background-color: $bgColor;
+    content: "";
+  }
+
+  &:before {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: px2rem(2px, $base-font-size);
+    height: 100%;
+  }
+
+  &:after {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: px2rem(2px, $base-font-size);
+  }
+
+  &-item {
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+    width: 50%;
+    height: px2rem(172px, $base-font-size);
+    padding: 2px 3px 3px 2px;
+    background: $whiteColor url("../img/classify-bg-1@3x.png") no-repeat 90% center;
+    background-size: px2rem(112px, $base-font-size);
+
+    &-title {
+      position: absolute;
+      top: px2rem(52px, $base-font-size);
+      left: px2rem(20px, $base-font-size);
+
+      h3,
+      p {
+        width: px2rem(230px, $base-font-size);
+        @include ellipsis;
+      }
+
+      h3 {
+        font-size: 16px;
+        color: $subColor;
+      }
+
+      p {
+        margin-top: px2rem(10px, $base-font-size);
+        font-size: 12px;
+        color: $fontColor3;
+      }
+    }
+  }
+}
+
+// 小分类字体适配
+[data-dpr="2"] .classify {
+  &-item {
+    &-title {
+      h3 {
+        font-size: 32px;
+      }
+
+      p {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+[data-dpr="3"] .classify {
+  &-item {
+    &-title {
+      h3 {
+        font-size: 48px;
+      }
+
+      p {
+        font-size: 36px;
+      }
+    }
+  }
+}
+
+// 样式块
+.part {
+  width: 100%;
+
+  &-title {
+    background-color: $whiteColor;
+    height: px2rem(92px, $base-font-size);
+    padding-left: px2rem(20px, $base-font-size);
+    color: $fontColor1;
+    font-size: 18px;
+    line-height: px2rem(92px, $base-font-size);
+  }
+
+  // 场地派推荐
+  .recommend-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 px2rem(20px, $base-font-size);
+    position: relative;
+    overflow: hidden;
+    background-color: $whiteColor;
+
+    .recommend {
+      &-item {
+        width: px2rem(600px, $base-font-size);
+        background-color: $whiteColor;
+
+        a {
+          display: block;
+          width: px2rem(600px, $base-font-size);
+          height: px2rem(378px, $base-font-size);
+          background-color: $cdpColor;
+          background-size: cover;
+        }
+
+        &-title {
+          height: px2rem(90px, $base-font-size);
+          color: $fontColor2;
+          font-size: 16px;
+          line-height: px2rem(80px, $base-font-size);
+          margin-bottom: px2rem(10px, $base-font-size);
+        }
+      }
+    }
+  }
+}
+
+// 样式块字体适配
+[data-dpr="2"] .part {
+  &-title {
+    font-size: 36px;
+  }
+
+  .recommend-wrapper {
+    .recommend {
+      &-item {
+        &-title {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}
+
+[data-dpr="3"] .part {
+  &-title {
+    font-size: 54px;
+  }
+
+  .recommend-wrapper {
+    .recommend {
+      &-item {
+        &-title {
+          font-size: 48px;
+        }
+      }
+    }
+  }
+}
+
+// 额外块
+.extra-part {
+  background-color: $whiteColor;
+  height: px2rem(140px, $base-font-size);
+  line-height: px2rem(140px, $base-font-size);
+  text-align: center;
+
+  a {
+    font-size: 18px;
+    color: $cdpColor;
+  }
+}
+
+[data-dpr="2"] .extra-part {
+  a {
+    font-size: 36px;
+  }
+}
+
+[data-dpr="3"] .extra-part {
+  a {
+    font-size: 54px;
+  }
+}
+
+// 通用组件
+@import "component/placeItem";
+@import "component/footer";

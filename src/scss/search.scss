@@ -1,0 +1,321 @@
+@import "common";
+@import "global";
+
+body {
+  padding-top: px2rem(160px, $base-font-size);
+}
+
+.search-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+@import "component/topBar";
+
+.filter-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: px2rem(72px, $base-font-size);
+  background-color: $whiteColor;
+  border-top: 1px solid $bgColor;
+  border-bottom: 1px solid $fontColor4;
+
+  &-area,
+  &-price,
+  &-screen,
+  &-sort {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    line-height: px2rem(72px, $base-font-size);
+    color: $fontColor2;
+    font-size: 14px;
+
+    i {
+      margin-left: px2rem(6px, $base-font-size);
+      color: $fontColor3;
+      font-size: 13px;
+    }
+  }
+
+  &-area,
+  &-price,
+  &-screen {
+    &:after {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      content: "";
+      display: block;
+      width: 1px;
+      height: px2rem(40px, $base-font-size);
+      background-color: $bgColor;
+    }
+  }
+
+  .active {
+    color: $cdpColor;
+
+    i {
+      color: $cdpColor;
+    }
+  }
+}
+
+[data-dpr="2"] .filter-bar {
+  &-area,
+  &-price,
+  &-screen,
+  &-sort {
+    font-size: 28px;
+
+    i {
+      font-size: 26px;
+    }
+  }
+}
+
+[data-dpr="3"] .filter-bar {
+  &-area,
+  &-price,
+  &-screen,
+  &-sort {
+    font-size: 42px;
+
+    i {
+      font-size: 39px;
+    }
+  }
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: px2rem(800px, $base-font-size);
+  background-color: $whiteColor;
+  border-bottom: 1px solid $fontColor3;
+
+  &-type {
+    display: flex;
+    flex: 1;
+
+    &-left {
+      flex: 1.5;
+      background-color: $bgColor;
+    }
+
+    &-right {
+      flex: 2.5;
+      position: relative;
+    }
+
+    &-mid {
+      flex: 1;
+    }
+
+    &-left,
+    &-right,
+    &-mid {
+      overflow-y: scroll;
+
+      ul {
+        width: 100%;
+
+        li {
+          padding: 0 px2rem(20px, $base-font-size);
+          height: px2rem(100px, $base-font-size);
+          line-height: px2rem(100px, $base-font-size);
+          font-size: 14px;
+          color: $fontColor2;
+          @include clearfix;
+
+          i {
+            float: right;
+            color: $fontColor3;
+          }
+        }
+
+        li.active {
+          background-color: $whiteColor;
+          color: $cdpColor;
+
+          i {
+            color: $cdpColor;
+          }
+        }
+      }
+    }
+
+    &-right {
+      ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &-mid {
+      ul {
+        li {
+          border-bottom: 1px solid $bgColor;
+        }
+      }
+    }
+  }
+
+  &-top {
+    flex: 7;
+    overflow-y: scroll;
+
+    &-sub {
+      padding: px2rem(20px, $base-font-size);
+
+      h4 {
+        font-size: 14px;
+        color: $fontColor3;
+      }
+
+      ul {
+        @include clearfix;
+
+        li {
+          float: left;
+          box-sizing: border-box;
+          width: 30%;
+          border: 1px solid $fontColor4;
+          border-radius: px2rem(6px, $base-font-size);
+          margin: px2rem(10px, $base-font-size) px2rem(22px, $base-font-size) px2rem(10px, $base-font-size) 0;
+          line-height: px2rem(50px, $base-font-size);
+          font-size: 14px;
+          text-align: center;
+          color: $fontColor2;
+        }
+
+        li.active {
+          color: $cdpColor;
+          border-color: $cdpColor;
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    flex: 1;
+    background-color: $bgColor;
+    border-top: 1px solid $fontColor4;
+    text-align: center;
+
+    input {
+      margin: px2rem(10px, $base-font-size) px2rem(10px, $base-font-size) 0;
+      padding: px2rem(16px, $base-font-size) 0;
+      border-radius: px2rem(6px, $base-font-size);
+      font-size: 16px;
+    }
+
+    input.cancel {
+      width: px2rem(250px, $base-font-size);
+      border: 1px solid $fontColor4;
+      background-color: $fontColor4;
+      color: $fontColor3;
+    }
+
+    input.confirm {
+      width: px2rem(350px, $base-font-size);
+      border: 1px solid $cdpColor;
+      background-color: $cdpColor;
+      color: $whiteColor;
+    }
+  }
+
+
+}
+
+[data-dpr="2"] .filter-list {
+  &-type {
+    &-left,
+    &-right,
+    &-mid {
+      ul {
+        li {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+
+  &-top {
+    &-sub {
+      h4 {
+        font-size: 28px;
+      }
+
+      ul {
+        li {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    input {
+      font-size: 32px;
+    }
+  }
+}
+
+[data-dpr="3"] .filter-list {
+  &-type {
+    &-left,
+    &-right,
+    &-mid {
+      ul {
+        li {
+          font-size: 42px;
+        }
+      }
+    }
+  }
+
+  &-top {
+    &-sub {
+      h4 {
+        font-size: 42px;
+      }
+
+      ul {
+        li {
+          font-size: 42px;
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    input {
+      font-size: 48px;
+    }
+  }
+}
+
+
+
+@import "component/placeItem";
+@import "component/noMore"
+
+
+
+
+
+
+
+
+
+
