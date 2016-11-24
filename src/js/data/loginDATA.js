@@ -48,7 +48,13 @@ $(function () {
   // 发送验证码
   $('#sendVaildateNum').on('click', function () {
     var uid = $('#userPhone').val();
-    vaildateNum(uid);
+    if (uid.match(/^1[3|4|5|7|8][0-9]{9}$/)) {
+      console.log(uid);
+      time($(this));
+      vaildateNum(uid);
+    } else {
+      checkPhone(uid);
+    }
   });
 });
 
@@ -59,25 +65,54 @@ $(function () {
 ====================
 */
 
+var wait=60;
+function time(o) {
+  if (wait === 0) {
+    o.removeClass('disabled');
+    o.removeAttr('disabled');
+    o.val('重新发送');
+    wait = 60;
+  } else {
+    o.addClass("disabled");
+    o.attr('disabled', true);
+    o.val('重新发送 ' + wait + ' s');
+    wait--;
+    setTimeout(function() {
+      time(o);
+    },
+    1000);
+    return false;
+  }
+}
+
 // 登录/注册 函数
 function login(userInfo) {
   $.ajax({
     type: 'GET',
-    url: 'http://m.changdipai.com/changdipai/user/login',
+    url: 'http://m.changdipai.com/api/v2/user/login',
     data: userInfo + '&token=' + tokenNum,
     dataType: 'JSONP',
     jsonp: 'callback',
     success: function (getData) {
-      console.log(getData);
       var data = JSON.parse(getData);
-      tokenNum = data.data.token;
-      var userId = data.data.user.id;
-      console.log(userId);
-      // 存储 服务器 返回 新token
-      $.fn.cookie('tokenNum', tokenNum);
-      $.fn.cookie('userId', userId);
-      $.fn.cookie('loginStatus', '1');
-      window.location.href = 'userCenter.html';
+      var statusNum = data.status;
+      console.log(statusNum);
+      if (statusNum.toString().match(/^2[0-9]{2}$/)) {
+        tokenNum = data.data.token;
+        var userId = data.data.user.id;
+        // 存储 服务器返回新token
+        $.fn.cookie('tokenNum', tokenNum);
+        $.fn.cookie('userId', userId);
+        $.fn.cookie('loginStatus', '1');
+        window.location.href = 'userCenter.html';
+      } else {
+        $('#popup').removeClass('hide').addClass('show');
+        $('#tip').text('发生错误了！');
+        setTimeout(function () {
+          $('#popup').removeClass('show').addClass('hide');
+          history.go(0);
+        }, 1000);
+      }
     }
   });
 }
@@ -86,7 +121,7 @@ function login(userInfo) {
 function vaildateNum(uid) {
   $.ajax({
     type: 'GET',
-    url: 'http://m.changdipai.com/changdipai/user/mac',
+    url: 'http://m.changdipai.com/api/v2/user/mac',
     data: {
       'uid': uid
     },
