@@ -68,9 +68,9 @@ function getPlace(id) {
       var oldContentStr = placeDetail.brief[0].content;
       var newContentStr;
       if (oldContentStr.indexOf('\r') >= 0 || oldContentStr.indexOf('\n') >= 0) {
-        newContentStr = oldContentStr.replace(/\r\n/g, '<br />');
+        newContentStr = oldContentStr.replace(/\n/g, '<br />');
       }
-      $('#placeIntroduce').text(newContentStr);
+      $('#placeIntroduce').html(newContentStr);
       $('#placeIntroduce').attr('data-content', newContentStr);
       // 显示更多介绍
       var placeIntroduce = $('#placeIntroduce');
